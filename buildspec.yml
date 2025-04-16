@@ -5,8 +5,10 @@ phases:
     runtime-versions:
       kubectl: 1.29
     commands:
-      - echo Installing kubectl...
-      - curl -LO https://dl.k8s.io/release/v1.29.0/bin/linux/amd64/kubectl  # Direct URL for the specific version
+      - echo "Verifying kubectl file..."
+      - ls -l /tmp/cp-action-source/dist/kubectl/kubectl  # List the file details
+      - if [ -d /tmp/cp-action-source/dist/kubectl/kubectl ]; then echo "It's a directory!"; else echo "It's a file!"; fi
+      - curl -LO https://dl.k8s.io/release/v1.29.0/bin/linux/amd64/kubectl
       - chmod +x ./kubectl
       - sudo mv ./kubectl /usr/local/bin/kubectl
   pre_build:
